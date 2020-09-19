@@ -37,6 +37,7 @@ class Swiss_Rounding
         add_filter('plugin_action_links_' . plugin_basename(SWISS_ROUNDING_FILE), array($this, 'plugin_action_links'), 99, 1);
 
         add_filter('woocommerce_calc_tax', array($this, 'round_tax_price'), 999, 1);
+        add_filter('woocommerce_calc_shipping_tax', array($this, 'round_tax_price_shipping'), 999, 1);
         add_filter('woocommerce_coupon_get_discount_amount', array($this, 'round_discount_price'), 99, 1);
     }
 
@@ -73,14 +74,23 @@ class Swiss_Rounding
         if (get_option('sr_vat_price_rounding', '') == 'no') {
             return $taxes;
         }
-
-        if (is_admin()) {
+        else {
             foreach ($taxes as &$item) {
-                $item = round($item * 20, 0) / 20;
+                $item = round($item * 2, 1) / 2;
             }
-        } else {
+        }
+
+        return $taxes;
+    }
+
+    public function round_tax_price_shipping($taxes)
+    {
+        if (get_option('sr_vat_price_rounding_shipping', '') == 'no') {
+            return $taxes;
+        }
+        else {
             foreach ($taxes as &$item) {
-                $item = round($item / 5) * 5;
+                $item = round($item * 2, 1) / 2;
             }
         }
 
@@ -92,6 +102,6 @@ class Swiss_Rounding
         if (get_option('sr_discount_price_rounding', '') == 'no') {
             return $discount;
         }
-        return round($discount / 5, 2) * 5;
+        return round($item * 2, 1) / 2;
     }
 }

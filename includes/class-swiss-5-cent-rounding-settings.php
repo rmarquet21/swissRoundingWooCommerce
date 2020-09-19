@@ -56,6 +56,15 @@ class Swiss_Rounding_Settings_Tab
                 'desc' => esc_html__('Cocher pour arrondir la TVA à 5 centimes ou 0 centime', 'swiss-5-cent-rounding'),
                 'id' => 'sr_vat_price_rounding',
             ],
+            'sr_round_vat_shipping' => [
+                'name' => esc_html__('Arrondir la TVA de livraison', 'swiss-5-cent-rounding'),
+                'css' => 'width:600px;height:200px',
+                'type' => 'checkbox',
+                'default' => 'yes',
+                'desc' => esc_html__('Cocher pour arrondir la TVA à 5 centimes ou 0 centime pour la livraison', 'swiss-5-cent-rounding'),
+                'id' => 'sr_vat_price_rounding_shipping',
+            ],
+
 
             'section_end' => [
                 'type' => 'sectionend',
